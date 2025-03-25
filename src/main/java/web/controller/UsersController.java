@@ -45,20 +45,8 @@ public class UsersController {
     }
 
     @PatchMapping(value = "/update")
-    public String update(Model model, @RequestParam("id") Long id,
-                         @RequestParam("name") String name,
-                         @RequestParam("lastName") String lastName,
-                         @RequestParam("address") String address,
-                         @RequestParam("age") int age) {
-        User user = userService.getUserById(id);
-        if (user != null) {
-            user.setName(name);
-            user.setLastName(lastName);
-            user.setAddress(address);
-            user.setAge(age);
-            userService.updateUser(user);
-        }
-        model.addAttribute("upUser", user);
+    public String update(@ModelAttribute("upUser") User user) {
+        userService.updateUser(user);
         return "redirect:/";
     }
 
